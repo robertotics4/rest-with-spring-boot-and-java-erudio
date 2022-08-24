@@ -1,8 +1,7 @@
 package br.com.erudio.controllers;
 
-import br.com.erudio.exceptions.UnsupportedMathOperationException;
 import br.com.erudio.model.Person;
-import br.com.erudio.services.PersonService;
+import br.com.erudio.services.PersonServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -14,13 +13,13 @@ import java.util.List;
 public class PersonController {
 
     @Autowired
-    private PersonService service;
+    private PersonServices service;
 
     @RequestMapping(
             value = "/{id}",
             method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE
     )
-    public Person findById(@PathVariable(value = "id") String id) {
+    public Person findById(@PathVariable(value = "id") Long id) {
         return service.findById(id);
     }
 
@@ -53,7 +52,7 @@ public class PersonController {
             value = "/{id}",
             method = RequestMethod.DELETE
     )
-    public void delete(@PathVariable(value = "id") String id) {
+    public void delete(@PathVariable(value = "id") Long id) {
         service.delete(id);
     }
 }
